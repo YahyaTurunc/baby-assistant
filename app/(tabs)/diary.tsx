@@ -1,7 +1,8 @@
+import { useColorScheme } from '@/hooks/useColorScheme.web';
 import { Ionicons } from '@expo/vector-icons';
 import * as Clipboard from 'expo-clipboard';
 import React, { useState } from 'react';
-import { Alert, Modal, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Modal, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BabyHeader from '../components/BabyHeader';
 
@@ -12,6 +13,7 @@ interface DiaryEntry {
 }
 
 export default function DiaryScreen() {
+    const colorScheme = useColorScheme();
     const [diaryText, setDiaryText] = useState('');
     const [entries, setEntries] = useState<DiaryEntry[]>([]);
     const [selectedEntry, setSelectedEntry] = useState<DiaryEntry | null>(null);
@@ -70,13 +72,15 @@ export default function DiaryScreen() {
     };
 
     return (
-        <SafeAreaView className="flex-1 bg-baby-bg">
+        <SafeAreaView className="flex-1 bg-baby-bg dark:bg-slate-900">
+            <StatusBar barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'} />
+
             <BabyHeader />
             <View className="px-5 flex-1">
-                <Text className="text-2xl font-bold text-gray-800 mb-4">Bugün nasıldı?</Text>
+                <Text className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Bugün nasıldı?</Text>
 
                 <TextInput
-                    className="bg-white p-4 rounded-lg border border-gray-200 min-h-[150px] text-base"
+                    className="bg-white p-4 rounded-lg border border-gray-200 min-h-[150px] text-base dark:bg-slate-800 dark:border-slate-700 dark:text-white"
                     placeholder="Bugün neler yaşadınız?"
                     multiline
                     textAlignVertical="top"
@@ -98,12 +102,12 @@ export default function DiaryScreen() {
                         <TouchableOpacity
                             key={entry.id}
                             onPress={() => handleEntryPress(entry)}
-                            className="bg-white p-4 rounded-lg mb-3 border border-gray-200"
+                            className="bg-white p-4 rounded-lg mb-3 border border-gray-200 dark:bg-slate-800 dark:border-slate-700 dark:text-white"
                         >
                             <View className="flex-row justify-between items-start">
                                 <View className="flex-1">
-                                    <Text className="text-gray-500 text-sm mb-2">{entry.date}</Text>
-                                    <Text className="text-gray-800" numberOfLines={2}>
+                                    <Text className="text-gray-500 dark:text-white text-sm mb-2">{entry.date}</Text>
+                                    <Text className="text-gray-800 dark:text-white" numberOfLines={2}>
                                         {entry.content}
                                     </Text>
                                 </View>
@@ -125,9 +129,9 @@ export default function DiaryScreen() {
                     onRequestClose={() => setModalVisible(false)}
                 >
                     <View className="flex-1 justify-center items-center">
-                        <View className="bg-baby-bg shadow-md m-5 rounded-lg p-5 w-[90%]">
-                            <Text className="text-gray-500 text-sm mb-2">{selectedEntry?.date}</Text>
-                            <Text className="text-gray-800 text-base mb-4">{selectedEntry?.content}</Text>
+                        <View className="bg-baby-bg shadow-md m-5 rounded-lg p-5 w-[90%] dark:bg-slate-800">
+                            <Text className="text-gray-500 dark:text-white text-sm mb-2">{selectedEntry?.date}</Text>
+                            <Text className="text-gray-800 dark:text-white text-base mb-4">{selectedEntry?.content}</Text>
 
                             <View className="flex-row justify-end space-x-3">
                                 <TouchableOpacity
@@ -150,7 +154,7 @@ export default function DiaryScreen() {
                                     onPress={() => setModalVisible(false)}
                                     className="bg-gray-200 p-3 rounded-lg"
                                 >
-                                    <Text className="text-gray-800 font-semibold">Kapat</Text>
+                                    <Text className="text-gray-800  font-semibold">Kapat</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

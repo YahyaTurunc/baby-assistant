@@ -2,11 +2,12 @@ import images from '@/constants/images';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 import React from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, StatusBar, Text, TouchableOpacity, useColorScheme, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function LoginScreen() {
     const router = useRouter();
+    const colorScheme = useColorScheme();
 
     //   const handleLogin = async () => {
     //     const result = await login();
@@ -18,7 +19,8 @@ export default function LoginScreen() {
     //   }
     return (
         <SafeAreaView className='bg-white h-full'>
-            <ScrollView contentContainerClassName='h-full'>
+            <StatusBar barStyle={'dark-content'} />
+            <ScrollView contentContainerStyle={{ height: '100%' }}>
                 <Image source={images.loginimage} className='w-full h-[400px]' resizeMode='contain' />
                 <View className='px-10'>
                     <Text className='text-base text-center uppercase  text-black-200'>Bebek asİstanına hoş geldİnİz</Text>

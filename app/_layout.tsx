@@ -1,7 +1,7 @@
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
-import { BabyProvider } from './context/BabyContext';
+import { BabyProvider } from '../context/BabyContext';
 
 export default function Layout() {
   const colorScheme = useColorScheme();

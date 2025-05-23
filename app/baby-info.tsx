@@ -1,13 +1,15 @@
+import { useColorScheme } from '@/hooks/useColorScheme.web';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as ImagePicker from 'expo-image-picker';
 import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, Image, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Platform, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useBaby } from './context/BabyContext';
+import { useBaby } from '../context/BabyContext';
 
 export default function BabyInfoScreen() {
   const router = useRouter();
+  const colorScheme = useColorScheme();
   const { updateBabyInfo } = useBaby();
   const [babyName, setBabyName] = useState('');
   const [birthDate, setBirthDate] = useState(new Date());
@@ -48,23 +50,24 @@ export default function BabyInfoScreen() {
     if (Platform.OS === 'android') {
       setShowDatePicker(false);
     }
-    
+
     if (selectedDate) {
       setBirthDate(selectedDate);
     }
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-baby-bg p-5">
+    <SafeAreaView className="flex-1 bg-baby-bg dark:bg-slate-900 p-5">
+      <StatusBar barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'} />
       <ScrollView showsVerticalScrollIndicator={false} className="space-y-6">
-        <TouchableOpacity 
+        <TouchableOpacity
           onPress={pickImage}
           className="items-center mb-6"
         >
-          <View className="w-32 h-32 rounded-full bg-gray-200 items-center justify-center overflow-hidden">
+          <View className="w-32 h-32 rounded-full bg-gray-200 dark:bg-slate-800 items-center justify-center overflow-hidden">
             {image ? (
-              <Image 
-                source={{ uri: image }} 
+              <Image
+                source={{ uri: image }}
                 className="w-full h-full"
               />
             ) : (
@@ -74,9 +77,9 @@ export default function BabyInfoScreen() {
         </TouchableOpacity>
 
         <View>
-          <Text className="text-lg font-semibold text-gray-700 mb-2">Bebek Adı</Text>
+          <Text className="text-lg font-semibold text-gray-700 dark:text-white mb-2">Bebek Adı</Text>
           <TextInput
-            className="bg-white p-4 rounded-lg border border-gray-200"
+            className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700 dark:text-white"
             placeholder="Bebeğinizin adını girin"
             value={babyName}
             onChangeText={setBabyName}
@@ -84,12 +87,12 @@ export default function BabyInfoScreen() {
         </View>
 
         <View>
-          <Text className="text-lg font-semibold text-gray-700 mb-2">Doğum Tarihi</Text>
+          <Text className="text-lg font-semibold text-gray-700 mb-2 dark:text-white">Doğum Tarihi</Text>
           <TouchableOpacity
             onPress={() => setShowDatePicker(true)}
-            className="bg-white p-4 rounded-lg border border-gray-200"
+            className="bg-white p-4 rounded-lg border border-gray-200 dark:bg-slate-800 dark:border-slate-700 dark:text-white"
           >
-            <Text className="text-gray-700">
+            <Text className="text-gray-700 dark:text-white">
               {birthDate.toLocaleDateString('tr-TR')}
             </Text>
           </TouchableOpacity>
@@ -107,34 +110,30 @@ export default function BabyInfoScreen() {
         </View>
 
         <View>
-          <Text className="text-lg font-semibold text-gray-700 mb-2">Cinsiyet</Text>
+          <Text className="text-lg font-semibold text-gray-700 dark:text-white mb-2">Cinsiyet</Text>
           <View className="flex-row space-x-4">
             <TouchableOpacity
               onPress={() => setGender('male')}
-              className={`flex-1 p-4 rounded-full border ${
-                gender === 'male' 
+              className={`flex-1 p-4 rounded-full border ${gender === 'male'
                   ? 'bg-blue-400 border-blue-300'
-                  : 'bg-white border-gray-200'
-              }`}
+                  : 'bg-white border-gray-200 dark:bg-slate-800 dark:border-slate-700'
+                }`}
             >
-              <Text className={`text-center font-semibold ${
-                gender === 'male' ? 'text-white' : 'text-gray-700'
-              }`}>
+              <Text className={`text-center font-semibold ${gender === 'male' ? 'text-white' : 'text-gray-700 dark:text-white'
+                }`}>
                 Erkek
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               onPress={() => setGender('female')}
-              className={`flex-1 p-4 rounded-full border ${
-                gender === 'female' 
+              className={`flex-1 p-4 rounded-full border ${gender === 'female'
                   ? 'bg-pink-400 border-pink-300'
-                  : 'bg-white border-gray-200'
-              }`}
+                  : 'bg-white border-gray-200 dark:bg-slate-800 dark:border-slate-700'
+                }`}
             >
-              <Text className={`text-center font-semibold ${
-                gender === 'female' ? 'text-white' : 'text-gray-700'
-              }`}>
+              <Text className={`text-center font-semibold ${gender === 'female' ? 'text-white' : 'text-gray-700 dark:text-white'
+                }`}>
                 Kız
               </Text>
             </TouchableOpacity>
