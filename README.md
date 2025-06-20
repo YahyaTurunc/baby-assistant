@@ -1,50 +1,94 @@
-# Welcome to your Expo app 👋
+# 👶 Baby Assistant
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Baby Assistant, anneler ve babalar için geliştirilmiş, bebek gelişimini ve günlüklerini kolayca takip edebileceğiniz, yapay zeka destekli modern bir mobil uygulamadır.
 
-## Get started
+## 🚀 Özellikler
 
-1. Install dependencies
+- **Giriş ve Kayıt:**
+  - Google ile giriş veya üye olmadan devam etme
+- **Bebek Bilgileri:**
+  - Bebek adı, doğum tarihi, cinsiyet ve fotoğraf ekleme
+- **Günlük:**
+  - Her gün için notlar ekleyin, düzenleyin, silin ve geçmişi görüntüleyin
+- **AI Chat:**
+  - OpenAI ile entegre, yapay zekaya soru sorabilir, yanıtları kaydedebilir ve geçmişi inceleyebilirsiniz
+- **Profil:**
+  - Bebek bilgilerini dilediğiniz zaman güncelleyebilirsiniz
+- **Modern ve Responsive Tasarım:**
+  - Dark mode desteği, pastel renkler, kullanıcı dostu arayüz
+- **Firebase Entegrasyonu:**
+  - Tüm chat geçmişi ve günlükler Firestore'da saklanır
 
-   ```bash
-   npm install
-   ```
+## 🛠️ Kurulum
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+### 1. Depoyu Klonlayın
 ```bash
-npm run reset-project
+git clone https://github.com/kullanici-adi/baby-assistant.git
+cd baby-assistant
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Bağımlılıkları Yükleyin
+```bash
+npm install
+```
 
-## Learn more
+### 3. Firebase Yapılandırması
+- [Firebase Console](https://console.firebase.google.com/) üzerinden bir proje oluşturun
+- Firestore Database'i etkinleştirin
+- `app/firebaseConfig.ts` dosyasındaki alanları kendi projenizin bilgileriyle doldurun:
+  ```ts
+  const firebaseConfig = {
+    apiKey: 'YOUR_API_KEY',
+    authDomain: 'YOUR_AUTH_DOMAIN',
+    projectId: 'YOUR_PROJECT_ID',
+    storageBucket: 'YOUR_STORAGE_BUCKET',
+    messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+    appId: 'YOUR_APP_ID',
+  };
+  ```
+- Firestore kurallarını geliştirme/test için aşağıdaki gibi ayarlayabilirsiniz:
+  ```
+  service cloud.firestore {
+    match /databases/{database}/documents {
+      match /{document=**} {
+        allow read, write: if true;
+      }
+    }
+  }
+  ```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 4. OpenAI API Anahtarı
+- [OpenAI](https://platform.openai.com/api-keys) üzerinden bir API anahtarı oluşturun
+- Proje kök dizinine `.env` dosyası oluşturun ve aşağıdaki satırı ekleyin:
+  ```env
+  EXPO_PUBLIC_OPENAI_API_KEY=sk-xxxxxx
+  ```
+- (Expo ile çalışıyorsanız `EXPO_PUBLIC_` prefixi gereklidir)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### 5. Uygulamayı Başlatın
+```bash
+npx expo start
+```
+veya
+```bash
+npm run start
+```
 
-## Join the community
+## 📱 Ekranlar
+- **Giriş:** Modern karşılama ve giriş seçenekleri
+- **Bebek Bilgileri:** İlk kurulumda ve profil ekranında düzenlenebilir
+- **Günlük:** Not ekleme, silme, detay görüntüleme
+- **AI Chat:** Sohbet geçmişi, yeni chat başlatma, silme, detay
+- **Profil:** Bebek bilgilerini güncelleme
 
-Join our community of developers creating universal apps.
+## 💡 Notlar
+- Uygulama Expo ile geliştirilmiştir, hem iOS hem Android desteği vardır.
+- Tüm veriler Firebase Firestore'da saklanır.
+- OpenAI API anahtarınızı kimseyle paylaşmayın.
+- Firestore kurallarınızı canlıya çıkmadan önce güvenli hale getirin!
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🧑‍💻 Katkı
+Katkıda bulunmak isterseniz PR gönderebilir veya issue açabilirsiniz.
+
+## 📄 Lisans
+MIT
