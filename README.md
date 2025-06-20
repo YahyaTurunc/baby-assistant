@@ -23,7 +23,7 @@ Baby Assistant, anneler ve babalar için geliştirilmiş, bebek gelişimini ve g
 
 ### 1. Depoyu Klonlayın
 ```bash
-git clone https://github.com/kullanici-adi/baby-assistant.git
+git clone https://github.com/YahyaTurunc/baby-assistant.git
 cd baby-assistant
 ```
 
