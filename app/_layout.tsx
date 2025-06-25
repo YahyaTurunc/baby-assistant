@@ -12,7 +12,7 @@ export default function Layout() {
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="index" />
           <Stack.Screen name="login" />
-          <Stack.Screen name="baby-info" />
+          <Stack.Screen name="baby-info" options={{presentation: 'modal'}}/>
           <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
         </Stack>
       </BabyProvider>
